@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
-	"hexago/internal/infrastructure/server"
 )
 
 func main() {
-	fmt.Print("hexagon")
+	fmt.Print("hexago")
 
-	serverInstance := server.NewFiberServer()
+	serverInstance := initialize()
 
-	err := serverInstance.Listen(":3000")
+	err := serverInstance.Start()
 	if err != nil {
 		panic(err)
 	}

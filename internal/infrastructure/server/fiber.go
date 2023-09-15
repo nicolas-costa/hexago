@@ -2,16 +2,22 @@ package server
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"hexago/internal/infrastructure/controller"
 )
 
-func NewFiberServer() *fiber.App {
+type FiberServer struct {
+	server *fiber.App
+}
+
+func NewFiberServer(healthController *controller.HealthController) FiberServer {
 	server := fiber.New()
 
-	server.Get("/health", func(c *fiber.Ctx) error {
-		return c.JSON(map[string]interface{}{
-			"health": true,
-		})
-	})
+	server.Get("/health", healthController.Check)
 
-	return server
+	return FiberServer{server: server}
+}
+
+func (f *FiberServer) Start() error {
+	// @todo: add to env vars
+	return f.server.Listen(":3000")
 }
