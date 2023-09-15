@@ -1,4 +1,4 @@
-FROM golang as base
+FROM golang:1.21-alpine as base
 
 WORKDIR /app
 
@@ -10,7 +10,3 @@ FROM base as dev
 
 RUN go install github.com/githubnemo/CompileDaemon@latest && \
   go install github.com/joho/godotenv/cmd/godotenv@latest
-
-RUN go build -o ./cmd/hexago/hexago ./main.go
-
-ENTRYPOINT [ "./cmd/hexago/hexago" ]
