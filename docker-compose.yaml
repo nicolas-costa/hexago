@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  api:
+    image: hexago
+    build:
+      dockerfile: Dockerfile
+      context: ./
+      target: dev
+    # polling is being used here because, initially, I was developing with windows (it doesn't support fsevents AFAIK)
+    command: CompileDaemon -directory="./" -build="go build -o ./bin/hexago ./cmd/hexago/main.go ./cmd/hexago/wire_gen.go" -command="./bin/hexago" -polling=true -polling-interval=600
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./:/app"
