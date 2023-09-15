@@ -7,6 +7,7 @@
 package main
 
 import (
+	"hexago/internal/application"
 	"hexago/internal/infrastructure/controller"
 	"hexago/internal/infrastructure/server"
 )
@@ -14,7 +15,8 @@ import (
 // Injectors from wire.go:
 
 func initialize() server.FiberServer {
-	healthController := controller.NewHealthController()
+	healthService := application.NewHealthService()
+	healthController := controller.NewHealthController(healthService)
 	fiberServer := server.NewFiberServer(healthController)
 	return fiberServer
 }
