@@ -9,6 +9,7 @@ package main
 import (
 	"hexago/internal/application"
 	"hexago/internal/infrastructure/controller"
+	"hexago/internal/infrastructure/repositories"
 	"hexago/internal/infrastructure/server"
 )
 
@@ -17,6 +18,9 @@ import (
 func initialize() server.FiberServer {
 	healthService := application.NewHealthService()
 	healthController := controller.NewHealthController(healthService)
-	fiberServer := server.NewFiberServer(healthController)
+	coinGeckoClient := repositories.NewCoinRepository()
+	coinService := application.NewCoinService(coinGeckoClient)
+	coinController := controller.NewCoinController(coinService)
+	fiberServer := server.NewFiberServer(healthController, coinController)
 	return fiberServer
 }
