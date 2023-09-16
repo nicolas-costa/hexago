@@ -9,10 +9,17 @@ type FiberServer struct {
 	server *fiber.App
 }
 
-func NewFiberServer(healthController *controller.HealthController) FiberServer {
+func NewFiberServer(
+	healthController *controller.HealthController,
+	coinController *controller.CoinController,
+) FiberServer {
 	server := fiber.New()
 
 	server.Get("/health", healthController.Check)
+
+	api := server.Group("/api")
+
+	api.Get("/coin", coinController.CheckPrice)
 
 	return FiberServer{server: server}
 }
