@@ -4,6 +4,12 @@ import (
 	"fmt"
 )
 
+// @title Hexago API
+// @version 1.0
+// @contact.name API Support
+// @license.name Apache 2.0
+// @host localhost:3000
+// @BasePath /
 func main() {
 	fmt.Print("hexago")
 

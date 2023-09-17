@@ -1,0 +1,57 @@
+basePath: /
+definitions:
+  dtos.CoinResponseDTO:
+    properties:
+      coin:
+        type: string
+      error:
+        type: string
+      logo:
+        type: string
+      prices:
+        properties:
+          BRL:
+            type: string
+          USD:
+            type: string
+        type: object
+      status:
+        type: string
+      ticker:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    name: API Support
+  license:
+    name: Apache 2.0
+  title: Hexago API
+  version: "1.0"
+paths:
+  /coin:
+    get:
+      consumes:
+      - application/json
+      description: get accounts
+      parameters:
+      - description: get data by coin symbol
+        in: query
+        name: symbol
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.CoinResponseDTO'
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Get crypto
+      tags:
+      - crypto
+swagger: "2.0"

@@ -2,7 +2,9 @@ package server
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"hexago/internal/infrastructure/controller"
+	"github.com/gofiber/swagger"
+	_ "hexago/docs"
+	"hexago/internal/infrastructure/controllers"
 )
 
 type FiberServer struct {
@@ -16,6 +18,7 @@ func NewFiberServer(
 	server := fiber.New()
 
 	server.Get("/health", healthController.Check)
+	server.Get("/swagger/*", swagger.HandlerDefault)
 
 	api := server.Group("/api")
 
