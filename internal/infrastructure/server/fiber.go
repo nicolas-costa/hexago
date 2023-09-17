@@ -12,8 +12,8 @@ type FiberServer struct {
 }
 
 func NewFiberServer(
-	healthController *controller.HealthController,
-	coinController *controller.CoinController,
+	healthController *controllers.HealthController,
+	coinController *controllers.CoinController,
 ) FiberServer {
 	server := fiber.New()
 

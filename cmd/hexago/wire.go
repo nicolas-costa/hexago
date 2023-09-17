@@ -6,15 +6,15 @@ package main
 import (
 	"github.com/google/wire"
 	"hexago/internal/application"
-	"hexago/internal/infrastructure/controller"
+	"hexago/internal/infrastructure/controllers"
 	"hexago/internal/infrastructure/repositories"
 	"hexago/internal/infrastructure/server"
 )
 
 func initialize() server.FiberServer {
 	wire.Build(
-		controller.NewHealthController,
-		controller.NewCoinController,
+		controllers.NewHealthController,
+		controllers.NewCoinController,
 		server.NewFiberServer,
 		application.NewHealthService,
 		wire.Bind(new(application.Checker), new(*application.HealthService)),
