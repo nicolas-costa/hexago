@@ -8,5 +8,4 @@ RUN go mod download
 
 FROM base as dev
 
-RUN go install github.com/githubnemo/CompileDaemon@latest && \
-  go install github.com/joho/godotenv/cmd/godotenv@latest
+RUN go install github.com/githubnemo/CompileDaemon@latest
